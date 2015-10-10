@@ -9,8 +9,70 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # options are documented and commented below. For a complete reference,
   # please see the online documentation at vagrantup.com.
 
-  # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "remram/debian-9-amd64"
+  config.vm.define "lb1" do |lb1|
+    lb1.vm.box = "debian/jessie64"
+    lb1.vm.hostname = "lb1"
+    lb1.vm.network "private_network", ip: "10.10.1.10"
+    lb1.vm.network "private_network", ip: "10.10.2.150"
+    lb1.vm.network "private_network", ip: "10.10.3.150"
+
+    # For masterless, mount your salt file root
+    lb1.vm.synced_folder "saltstack/root/", "/srv/salt/"
+
+    ## Use all the defaults:
+    lb1.vm.provision :salt do |salt|
+      salt.minion_config = "saltstack/etc/minion"
+      salt.run_highstate = true
+    end
+  end
+
+  config.vm.define "lb2" do |lb2|
+    lb2.vm.box = "debian/jessie64"
+    lb2.vm.hostname = "lb2"
+    lb2.vm.network "private_network", ip: "10.10.1.11"
+    lb2.vm.network "private_network", ip: "10.10.2.151"
+    lb2.vm.network "private_network", ip: "10.10.3.151"
+
+    # For masterless, mount your salt file root
+    lb2.vm.synced_folder "saltstack/root/", "/srv/salt/"
+
+    ## Use all the defaults:
+    lb2.vm.provision :salt do |salt|
+      salt.minion_config = "saltstack/etc/minion"
+      salt.run_highstate = true
+    end
+  end
+
+  config.vm.define "app1" do |app1|
+    app1.vm.box = "debian/jessie64"
+    app1.vm.hostname = "app1"
+    app1.vm.network "private_network", ip: "10.10.2.10"
+    app1.vm.network "private_network", ip: "10.10.3.10"
+
+    # For masterless, mount your salt file root
+    app1.vm.synced_folder "saltstack/root/", "/srv/salt/"
+
+    ## Use all the defaults:
+    app1.vm.provision :salt do |salt|
+      salt.minion_config = "saltstack/etc/minion"
+      salt.run_highstate = true
+    end
+  end
+
+  config.vm.define "db1" do |db1|
+    db1.vm.box = "debian/jessie64"
+    db1.vm.hostname = "db1"
+    db1.vm.network "private_network", ip: "10.10.3.100"
+
+    # For masterless, mount your salt file root
+    db1.vm.synced_folder "saltstack/root/", "/srv/salt/"
+
+    ## Use all the defaults:
+    db1.vm.provision :salt do |salt|
+      salt.minion_config = "saltstack/etc/minion"
+      salt.run_highstate = true
+    end
+  end
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
