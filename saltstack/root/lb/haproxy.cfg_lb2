@@ -42,9 +42,9 @@ listen stats
 
 defaults REDIS
 	mode tcp
-	timeout connect  4s
-	timeout server  30s
-	timeout client  30s
+	timeout connect  3s
+	timeout server  6s
+	timeout client  6s
 
 frontend public_lamernews
 	bind *:80             # or any other IP:port combination we listen to.
