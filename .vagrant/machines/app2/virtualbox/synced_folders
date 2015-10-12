@@ -1,0 +1,1 @@
+{"virtualbox":{"/srv/salt":{"guestpath":"/srv/salt","hostpath":"/home/lorenz0/lamernews_vagrant/saltstack/root","disabled":false},"/vagrant":{"guestpath":"/vagrant","hostpath":"/home/lorenz0/lamernews_vagrant","disabled":false}}}

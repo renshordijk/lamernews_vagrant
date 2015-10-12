@@ -42,25 +42,3 @@ vrrp_instance VI_3 {
         10.10.3.100
     }
 }
-
-virtual_server 10.10.1.100 80 {
-    delay_loop 6
-    lb_algo rr
-    lb_kind NAT
-    nat_mask 255.255.255.0
-    protocol TCP
-    real_server 10.10.2.10 4567 {
-        weight 1
-        TCP_CHECK {
-                connect_timeout 3
-        connect_port 4567
-        }
-    }
-    real_server 10.10.2.11 4567 {
-        weight 1
-        TCP_CHECK {
-                connect_timeout 3
-        connect_port 4567
-        }
-    }
-}

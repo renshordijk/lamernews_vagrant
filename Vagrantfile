@@ -13,8 +13,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     lb1.vm.box = "debian/jessie64"
     lb1.vm.hostname = "lb1"
     lb1.vm.network "private_network", ip: "10.10.1.10"
-    lb1.vm.network "private_network", ip: "10.10.2.150"
-    lb1.vm.network "private_network", ip: "10.10.3.150"
+    lb1.vm.network "private_network", ip: "10.10.2.10"
+    lb1.vm.network "private_network", ip: "10.10.3.10"
 
     # For masterless, mount your salt file root
     lb1.vm.synced_folder "saltstack/root/", "/srv/salt/"
@@ -30,8 +30,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     lb2.vm.box = "debian/jessie64"
     lb2.vm.hostname = "lb2"
     lb2.vm.network "private_network", ip: "10.10.1.11"
-    lb2.vm.network "private_network", ip: "10.10.2.151"
-    lb2.vm.network "private_network", ip: "10.10.3.151"
+    lb2.vm.network "private_network", ip: "10.10.2.11"
+    lb2.vm.network "private_network", ip: "10.10.3.11"
 
     # For masterless, mount your salt file root
     lb2.vm.synced_folder "saltstack/root/", "/srv/salt/"
@@ -43,11 +43,41 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
+  config.vm.define "db1" do |db1|
+    db1.vm.box = "debian/jessie64"
+    db1.vm.hostname = "db1"
+    db1.vm.network "private_network", ip: "10.10.3.150"
+
+    # For masterless, mount your salt file root
+    db1.vm.synced_folder "saltstack/root/", "/srv/salt/"
+
+    ## Use all the defaults:
+    db1.vm.provision :salt do |salt|
+      salt.minion_config = "saltstack/etc/minion"
+      salt.run_highstate = true
+    end
+  end
+
+  config.vm.define "db2" do |db2|
+    db2.vm.box = "debian/jessie64"
+    db2.vm.hostname = "db2"
+    db2.vm.network "private_network", ip: "10.10.3.151"
+
+    # For masterless, mount your salt file root
+    db2.vm.synced_folder "saltstack/root/", "/srv/salt/"
+
+    ## Use all the defaults:
+    db2.vm.provision :salt do |salt|
+      salt.minion_config = "saltstack/etc/minion"
+      salt.run_highstate = true
+    end
+  end
+
   config.vm.define "app1" do |app1|
     app1.vm.box = "debian/jessie64"
     app1.vm.hostname = "app1"
-    app1.vm.network "private_network", ip: "10.10.2.10"
-    app1.vm.network "private_network", ip: "10.10.3.10"
+    app1.vm.network "private_network", ip: "10.10.2.50"
+    app1.vm.network "private_network", ip: "10.10.3.50"
 
     # For masterless, mount your salt file root
     app1.vm.synced_folder "saltstack/root/", "/srv/salt/"
@@ -59,16 +89,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-  config.vm.define "db1" do |db1|
-    db1.vm.box = "debian/jessie64"
-    db1.vm.hostname = "db1"
-    db1.vm.network "private_network", ip: "10.10.3.100"
+  config.vm.define "app2" do |app2|
+    app2.vm.box = "debian/jessie64"
+    app2.vm.hostname = "app2"
+    app2.vm.network "private_network", ip: "10.10.2.51"
+    app2.vm.network "private_network", ip: "10.10.3.51"
 
     # For masterless, mount your salt file root
-    db1.vm.synced_folder "saltstack/root/", "/srv/salt/"
+    app2.vm.synced_folder "saltstack/root/", "/srv/salt/"
 
     ## Use all the defaults:
-    db1.vm.provision :salt do |salt|
+    app2.vm.provision :salt do |salt|
       salt.minion_config = "saltstack/etc/minion"
       salt.run_highstate = true
     end
