@@ -73,4 +73,4 @@ backend backend_redis
         tcp-check send QUIT\r\n
         tcp-check expect string +OK
         server R1 10.10.3.150:6379 check inter 1s
-        server R2 10.10.3.150:6379 check inter 1s
+        server R2 10.10.3.151:6379 check inter 1s
