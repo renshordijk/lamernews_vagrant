@@ -1,0 +1,48 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:		redis-sentinel
+# Required-Start:	$syslog $remote_fs
+# Required-Stop:	$syslog $remote_fs
+# Should-Start:		$local_fs
+# Should-Stop:		$local_fs
+# Default-Start:	2 3 4 5
+# Default-Stop:		0 1 6
+# Short-Description:	redis-sentinel - Persistent key-value db monitor
+# Description:		redis-sentinel - Persistent key-value db monitor
+### END INIT INFO
+
+
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+DAEMON=/usr/bin/redis-server
+NAME=redis-sentinel
+DESC=redis-sentinel
+
+RUNDIR=/var/run
+PIDFILE=$RUNDIR/redis-sentinel.pid
+
+NAME=`basename ${0}`
+EXEC=/usr/bin/redis-server
+CONF=/etc/redis/sentinel.conf
+
+PID=`cat $PIDFILE 2> /dev/null`
+
+case "$1" in
+     start)
+         echo "Starting $NAME ..."
+         touch $PIDFILE
+         exec $EXEC $CONF --sentinel --pidfile $PIDFILE
+         ;;
+     stop)
+         echo "Stopping $NAME PID: $PID ..."
+         kill $PID
+         ;;
+     restart)
+         echo "Restarting $NAME ..."
+         $0 stop
+         sleep 2
+         $0 start
+         ;;
+     *)
+         echo "Usage $0 {start|stop|restart}"
+         ;;
+esac

@@ -73,6 +73,21 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
+  config.vm.define "db3" do |db3|
+    db3.vm.box = "debian/jessie64"
+    db3.vm.hostname = "db3"
+    db3.vm.network "private_network", ip: "10.10.3.152"
+
+    # For masterless, mount your salt file root
+    db3.vm.synced_folder "saltstack/root/", "/srv/salt/"
+
+    ## Use all the defaults:
+    db3.vm.provision :salt do |salt|
+      salt.minion_config = "saltstack/etc/minion"
+      salt.run_highstate = true
+    end
+  end
+
   config.vm.define "app1" do |app1|
     app1.vm.box = "debian/jessie64"
     app1.vm.hostname = "app1"
@@ -148,6 +163,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #
   # View the documentation for the provider you're using for more
   # information on available options.
+  config.vm.provider :virtualbox do |vb|
+    vb.customize ["modifyvm", :id, "--memory", "256"]
+  end
 
   # Enable provisioning with CFEngine. CFEngine Community packages are
   # automatically installed. For example, configure the host as a
