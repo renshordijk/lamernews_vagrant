@@ -6,6 +6,7 @@ This is a lamernews deployment using Vagrant and Saltstack. Vagrant takes care o
 
 # Installation
 To use this installation, a few simple steps are needed:
+
 1. Make sure you have Vagrant installed on your computer (ie. apt-get install vagrant on Debian systems)
 2. Clone this repository
 3. Enter the directory and type "vagrant up"
@@ -22,15 +23,11 @@ When everything is up and running, the following URL's are available to see the 
 ##HAproxy status
 Here you can find the status of HAproxy on both of the loadbalancers.
 
-LB1:
-http://10.10.1.10:8888/
-
-LB2:
-http://10.10.1.11:8888/
+LB1: http://10.10.1.10:8888/
+LB2: http://10.10.1.11:8888/
 
 ##Loadbalanced application
-The application is available at:
-http://10.10.1.100
+The application is available at: http://10.10.1.100
 
 # The set-up explained
 
