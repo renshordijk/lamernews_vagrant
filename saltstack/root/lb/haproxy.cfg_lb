@@ -37,7 +37,7 @@ defaults
 listen stats
         # Uncomment "disabeled" below to disable the stats page :
 	# disabled
-	bind       10.10.1.10:8888
+	bind       {{ ip }}:8888
 	stats uri /
 
 defaults REDIS

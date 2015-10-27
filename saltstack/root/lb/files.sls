@@ -20,10 +20,13 @@ haproxy:
   file:
     - managed
     - name: /etc/haproxy/haproxy.cfg
-    - source: salt://lb/haproxy.cfg_{{ grains['fqdn'] }}
+    - source: salt://lb/haproxy.cfg_lb
     - user: root
     - group: root
     - mode: 644
+    - template: jinja
+    - context:
+      ip: {{ grains['ip_interfaces']['eth1'][0] }}
     - require:
       - pkg: haproxy
   cmd:
