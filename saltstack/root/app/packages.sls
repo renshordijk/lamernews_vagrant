@@ -3,10 +3,7 @@ app_packages:
     - names:
       - git
       - ruby2.1
-      - ruby-redis
-      - ruby-hiredis
-      - ruby-sinatra
-      - ruby-json
-      - ruby-hmac
-      - ruby-mail
+      - apache2
+      - libapache2-mod-passenger
+      - bundler
       - openssl

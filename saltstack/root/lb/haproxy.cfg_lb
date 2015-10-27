@@ -56,8 +56,8 @@ backend backend_lamernews
 	balance roundrobin
 	# set the maxconn parameter below to match Apache's MaxClients minus
 	# one or two connections so that you can still directly connect to it.
-	server app1 10.10.2.50:4567 check
-	server app2 10.10.2.51:4567 check
+	server app1 10.10.2.50:80 check
+	server app2 10.10.2.51:80 check
 
 frontend public_redis
 	bind *:6379 name redis
