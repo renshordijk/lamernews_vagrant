@@ -3,3 +3,6 @@ common_packages:
     - names:
       - tcpdump
       - strace
+
+update:
+  pkg.uptodate
