@@ -58,3 +58,6 @@ The DB's are servers which run the Redis database (one master, the rest configur
 
 # Possible improvements
 * For an even more automated set-up, consider using a continuous integration / continuous delivery tool, which automates the build, testing and deployment of the application (which now is handled by git)
+
+# Issues
+* This installation does not work under Windows. This is due to the fact that Windows is messing up the line endings. Scripts have problems with this. This can be resolved when using a real Saltstack master instead of local files.
