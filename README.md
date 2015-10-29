@@ -12,10 +12,10 @@ To use this installation, a few simple steps are needed:
 3. Clone this repository
 4. Enter the directory and type "vagrant up"
 
-After these steps are done, Vagrant will deploy seven VM's (lb1, lb2, app1, app2, db1, db2 and db3).
+After these steps are done, Vagrant will deploy seven VM's (lb1, lb2, app1, app2, db1, db2 and db3) in VirtualBox.
 
 # System requirements
-1. Make sure you have at lease 2 GB free memory on your system.
+1. Make sure you have at least 2 GB free memory on your system.
 2. Make sure you are not using the ip ranges 10.10.1.0/24, 10.10.2.0/24, 10.10.3.0/24. These are used by Vagrant, and IP conflicts should be avoided.
 
 # Usage
@@ -24,7 +24,7 @@ When everything is up and running, the following URL's are available to see the 
 ##HAproxy status
 Here you can find the status of HAproxy on both of the loadbalancers.
 
-LB1: http://10.10.1.10:8888/
+LB1: http://10.10.1.10:8888/  
 LB2: http://10.10.1.11:8888/
 
 ##Loadbalanced application
