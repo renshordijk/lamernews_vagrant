@@ -18,6 +18,10 @@ After these steps are done, Vagrant will deploy seven VM's (lb1, lb2, app1, app2
 1. Make sure you have at least 2 GB free memory on your system.
 2. Make sure you are not using the ip ranges 10.10.1.0/24, 10.10.2.0/24, 10.10.3.0/24. These are used by Vagrant, and IP conflicts should be avoided.
 
+This installation is tested with:
+* Vagrant 1.6.5
+* Virtualbox 4.3.30 and 4.3.32
+
 # Usage
 When everything is up and running, the following URL's are available to see the results:
 
